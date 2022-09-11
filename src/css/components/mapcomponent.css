@@ -1,0 +1,24 @@
+.mapModel {
+    position: relative;
+    width: 24.1vw;
+    height: 24.1vh;
+    background-color: #ffffff;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 97% 95%;
+    cursor: pointer;
+}
+
+.mapModel:hover {
+    background-color: #a5a5a5;
+}
+
+.mapName {
+    position: absolute;
+    color: white;
+    font-size: 2rem;
+    font-family: ph2;
+    top: 14vh;
+    right: 1vw;
+    text-shadow: 0.15vw 0.15vw 0px #000000;
+}

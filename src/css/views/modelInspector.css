@@ -1,0 +1,22 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.window {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    margin-top: 0.5rem;
+    margin-left: 0.5rem;
+    width: 98.5vw;
+    max-width: 98.5vw;
+    height: 97.5vh;
+    max-height: 97.5vh;
+    overflow: hidden;
+    align-items: center;
+}
+
+.prop {
+    margin-left: 0.65vw;
+}

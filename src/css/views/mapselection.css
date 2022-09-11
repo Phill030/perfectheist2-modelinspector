@@ -1,0 +1,25 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.maplist {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    margin-top: 0.5rem;
+    margin-left: 0.5rem;
+    width: 98.5vw;
+    max-width: 98.5vw;
+    height: 97.5vh;
+    max-height: 97.5vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    flex-wrap: wrap;
+    align-content: flex-start;
+}
+
+.map {
+    position: relative;
+    margin: 0.25vw;
+}

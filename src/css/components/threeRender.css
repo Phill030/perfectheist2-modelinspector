@@ -1,0 +1,6 @@
+.render {
+    position: relative;
+    display: flex;
+    width: 50vw;
+    height: 96vh;
+}

@@ -1,0 +1,26 @@
+:root {
+    --blurple: #5865f2;
+    --blurplehover: #4752c4;
+    --legacyblurple: #7289da;
+    --notquiteblack: #151718;
+    --gray: #36393f;
+    --grayhover: #2f3136;
+    --hoverlight: #3c3f45;
+    --discord: #bbbbbb;
+
+    --radius: 0.8rem;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    scroll-behavior: smooth;
+    user-select: none;
+    background-color: var(--notquiteblack);
+    display: flex;
+}
+
+@font-face {
+    font-family: 'ph2';
+    src: url('../fonts/PerfectHeist2Font.ttf');
+}
