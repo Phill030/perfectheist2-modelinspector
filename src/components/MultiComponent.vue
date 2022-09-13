@@ -85,7 +85,10 @@ export default defineComponent({
 @import "../css/components/multiComponent.css";
 </style>
 
-<!-- TODO: MapFolder Model selection &&
+<!-- TODO:  MapFolder Model selection &&
             show if model in map has texture file (icons)
             Convert lists into treeview from vue (DIY)
+                      If the user has no maps/no folder found directly show the asset page
+            If the users map has no entities, only show it after it has >= 1
+            Rework the Serverside API since it uses an absolute path (use queries for selection)
 -->

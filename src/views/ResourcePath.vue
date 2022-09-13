@@ -17,7 +17,7 @@ export default defineComponent({
   data() {
     return {
       resourceFolder: "",
-      mapName: ""
+      mapName: "" as string | undefined
     };
   },
   methods: {
@@ -38,7 +38,7 @@ export default defineComponent({
     },
   },
   mounted() {
-    this.mapName = this.$route.query.mapName as string;
+    this.mapName = this.$route.query.mapName as string | undefined;
   }
 });
 </script>

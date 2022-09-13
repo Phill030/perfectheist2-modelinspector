@@ -18,7 +18,7 @@ import MapComponent from "../components/MapComponent.vue";
 export default defineComponent({
   data() {
     return {
-      maps: [] as Array<{ name: string; image: string }>,
+      maps: [] as Array<{ name: string; image: string }> | undefined,
     };
   },
   components: {
@@ -30,14 +30,31 @@ export default defineComponent({
       headers: {
         "Content-Type": "application/json",
       },
-    })
-    
-    this.maps = JSON.parse(await send.text());
-    console.log(`[Debug] Received following maps: ${this.maps.flatMap(x => x.name+` `)}`)
+    });
+
+    const received = await send.text();
+    if (received) {
+      // >= 1 Map found
+      this.maps = JSON.parse(received);
+      console.log(
+        `[Debug] Received following maps: ${this.maps?.flatMap(
+          (x) => x.name + ` `
+        )}`
+      );
+    } else {
+      // No Maps found
+      this.maps = undefined;
+      console.log(`[Debug] No map was found, proceed to asset selection...`);
+
+      this.$router.push({
+        path: "resourcePath",
+        query: { mapName: undefined },
+      });
+    }
   },
   methods: {
     clickMap(name: string) {
-        this.$router.push({ path: 'resourcePath', query: { mapName: name } });
+      this.$router.push({ path: "resourcePath", query: { mapName: name } });
     },
   },
 });

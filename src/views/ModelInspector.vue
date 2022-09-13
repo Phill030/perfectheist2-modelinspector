@@ -3,8 +3,9 @@
     <MultiComponent
       :mapName="mapName"
       :textures="availableTextures"
-      :mapModels="mapModels"
+      :mapModels="mapModels ? mapModels : []"
       @updateTexture="selectTexture"
+      v-if="mapName"
     />
     <ResModelList
       class="resourceList prop"
@@ -27,7 +28,7 @@ import MultiComponent from "../components/MultiComponent.vue";
 export default defineComponent({
   data() {
     return {
-      mapName: "" as string,
+      mapName: "" as string | undefined,
       resourcePath: "" as string,
       models: {} as Model[],
 
@@ -40,7 +41,7 @@ export default defineComponent({
       selectedTexture: {} as { pack: string; texture: string },
       selectedTextureIdx: -1 as number,
 
-      mapModels: [] as Array<string>,
+      mapModels: [] as Array<string> | undefined,
     };
   },
   methods: {
@@ -64,7 +65,7 @@ export default defineComponent({
   },
   async mounted() {
     this.resourcePath = this.$route.query.resourceFolder as string;
-    this.mapName = this.$route.query.mapName as string;
+    this.mapName = this.$route.query.mapName as string | undefined;
 
     const req = await fetch(`http://localhost:5050/api/setResourcePath`, {
       method: "POST",
@@ -82,8 +83,10 @@ export default defineComponent({
     const resourceJson = JSON.parse(response["resource"]) as Model[];
     this.models = resourceJson;
 
-    const mapJson = JSON.parse(response["map"]) as Array<string>;
-    this.mapModels = mapJson;
+    if(response["map"]) {
+      const mapJson = JSON.parse(response["map"]) as Array<string> | undefined;
+      this.mapModels = mapJson;
+    }
 
     console.log(
       `[Debug] Selected map ${this.mapName} & Loaded ${this.models

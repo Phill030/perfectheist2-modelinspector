@@ -3,7 +3,7 @@ const cors = require("cors");
 const fs = require("fs");
 
 const port = 5050;
-const mapDir = `${process.env.HOME}\\AppData\\Local\\PerfectHeist2\\Saved\\LevelEditor\\`
+const mapDir = `${process.env.HOME}\\AppData\\Local\\PerfectHeist2\\Saved\\LevelEditor\\`;
 
 class Startup {
   static async start() {
@@ -34,17 +34,24 @@ class Startup {
         });
       }
 
-      const models = fs.readdirSync(mapDir+`${mapName}`).filter((file) => file.endsWith('.fbx'));
+      const models = undefined;
+      if (mapName)
+        fs.readdirSync(mapDir + `${mapName}`).filter((file) =>
+          file.endsWith(".fbx")
+        );
 
       app.use(express.static(resourceFolder));
 
-      res.send({ resource: JSON.stringify(resourceJson), map: JSON.stringify(models) });
+      res.send({
+        resource: JSON.stringify(resourceJson),
+        map: models ? JSON.stringify(models) : undefined,
+      });
     });
 
-    app.post('/api/validateResourcePath', (req, res) => {
+    app.post("/api/validateResourcePath", (req, res) => {
       const { resourceFolder } = req.body;
 
-      return res.send({ response: fs.existsSync(resourceFolder)});
+      return res.send({ response: fs.existsSync(resourceFolder) });
     });
 
     app.get("/api/getMaps", (req, res) => {
@@ -61,7 +68,7 @@ class Startup {
           `${process.env.HOME}\\AppData\\Local\\PerfectHeist2\\Saved\\LevelEditor\\${map}`
         );
 
-        const img = mapDir.includes('preview.png')
+        const img = mapDir.includes("preview.png")
           ? `${process.env.HOME}\\AppData\\Local\\PerfectHeist2\\Saved\\LevelEditor\\${map}\\preview.png`
           : "";
 
@@ -71,7 +78,7 @@ class Startup {
         });
       }
 
-      res.send(JSON.stringify(Maps));
+      res.send(Maps.length >= 1 ? JSON.stringify(Maps) : undefined);
     });
 
     app.post(`/api/createSymlink`, (req, res) => {});
